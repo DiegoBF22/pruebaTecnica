@@ -6,7 +6,7 @@ class Equipo
     private $conn;
     private $table = 'Equipos';
 
-    public function __construct()
+    public function conexion()
     {
         $database = new BaseDeDatos();
         $this->conn = $database->connect();
@@ -20,7 +20,7 @@ class Equipo
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function create($data)
+    public function crear($data)
     {
         $query = "INSERT INTO {$this->table} (nombre, ciudad, deporte, fundacion, estado, historia) 
                   VALUES (:nombre, :ciudad, :deporte, :fundacion, :estado, :historia)";
@@ -28,11 +28,13 @@ class Equipo
         $stmt->bindParam(':nombre', $data['nombre']);
         $stmt->bindParam(':ciudad', $data['ciudad']);
         $stmt->bindParam(':deporte', $data['deporte']);
-        $stmt->bindParam(':fecha_fundacion', $data['fecha_fundacion']);
+        $stmt->bindParam(':fundacion', $data['fundacion']);
+        $stmt->bindParam(':estado', $data['historia']);
+        $stmt->bindParam(':historia', $data['historia']);
         return $stmt->execute();
     }
 
-    public function getById($id)
+    public function getId($id)
     {
         $query = "SELECT * FROM {$this->table} WHERE id = :id";
         $stmt = $this->conn->prepare($query);
