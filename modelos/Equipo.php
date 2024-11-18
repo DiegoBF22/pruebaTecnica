@@ -1,12 +1,12 @@
 <?php
-require_once 'conexion/BaseDeDatos.php';
+require_once '../conexion/BaseDeDatos.php';
 
 class Equipo
 {
     private $conn;
     private $table = 'Equipos';
 
-    public function conexion()
+    public function __construct()
     {
         $database = new BaseDeDatos();
         $this->conn = $database->connect();
@@ -14,12 +14,11 @@ class Equipo
 
     public function getAll()
     {
-        $query = "select * from {$this->table}";
+        $query = "SELECT * FROM {$this->table}";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
     public function crear($data)
     {
         $query = "INSERT INTO {$this->table} (nombre, ciudad, deporte, fundacion, estado, historia) 
@@ -29,7 +28,7 @@ class Equipo
         $stmt->bindParam(':ciudad', $data['ciudad']);
         $stmt->bindParam(':deporte', $data['deporte']);
         $stmt->bindParam(':fundacion', $data['fundacion']);
-        $stmt->bindParam(':estado', $data['historia']);
+        $stmt->bindParam(':estado', $data['estado']);
         $stmt->bindParam(':historia', $data['historia']);
         return $stmt->execute();
     }
