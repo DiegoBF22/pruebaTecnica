@@ -41,4 +41,13 @@ class Equipo
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function getCapitan($idEquipo)
+    {
+        $query = "SELECT * FROM Jugadores WHERE idEquipo = :idEquipo AND capitan = 1 LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':equipo_id', $idEquipo);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

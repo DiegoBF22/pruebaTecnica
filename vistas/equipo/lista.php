@@ -29,6 +29,9 @@
                         <td><?= htmlspecialchars($equipo['fundacion'] ?? '-') ?></td>
                         <td><?= htmlspecialchars($equipo['estado'] ?? '-') ?></td>
                         <td><?= htmlspecialchars($equipo['historia'] ?? '-') ?></td>
+                        <td>
+                            <a href="index.php?action=mostrar&id=<?= $equipo['id'] ?>">Ver detalles</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -38,6 +41,9 @@
             <?php endif; ?>
         </tbody>
     </table>
+
+    <p><a href="index.php?action=crear">Crear un nuevo equipo</a></p>
+
 </body>
 
 </html>
